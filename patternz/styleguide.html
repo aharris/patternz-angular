@@ -11,14 +11,25 @@
     </div>
 
     <nav class="pz-nav">
-        <div ng-controller="PatternzCtrl as pz">
-            {{tree.elements.buttons["btn_primary.html"]}}
-        </div>
+        <ul ng-controller="PatternzCtrl as pz">
+            <li ng-repeat="(key, data) in tree track by $index">
+                {{key}}
+                <ul>
+                    <li ng-repeat="(key, data) in tree[key] track by $index">
+                        <a ng-href="#{{key}}">{{key}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </nav>
 
+    <div class="main" ng-view></div>
+
+    <script type="text/javascript" src="../bower_components/underscore/underscore-min.js" ></script>
     <script type="text/javascript" src="../bower_components/angular/angular.min.js" ></script>
+    <script type="text/javascript" src="../bower_components/angular-route/angular-route.min.js" ></script>
     <script type="text/javascript" src="../js/main.js" ></script>
-    <script type="text/javascript" src="js/patternz.js" ></script>
+    <!-- <script type="text/javascript" src="js/patternz.js" ></script> -->
 </body>
 </html>
 

@@ -10,9 +10,12 @@
         {{data.title}}
     </div>
 
-    <ng-include src="'patterns/elements/buttons/btn-primary.html'" onload="data.text = 'button text' "></ng-include>
+    <ng-include src="'patterns/elements/buttons/btn_primary.html'" ng-repeat="text in ['Primary Button'] "></ng-include>
+    <ng-include src="'patterns/elements/buttons/btn_secondary.html'" ng-repeat="text in ['Secondary button'] "></ng-include>
 
+    <script type="text/javascript" src="bower_components/underscore/underscore-min.js" ></script>
     <script type="text/javascript" src="bower_components/angular/angular.min.js" ></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js" ></script>
     <script type="text/javascript" src="js/main.js" ></script>
 </body>
 </html>

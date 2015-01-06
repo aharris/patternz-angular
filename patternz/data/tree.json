@@ -1,1 +1,1 @@
-{"elements":{"buttons":{"btn_primary.html":"elements/buttons/btn_primary.html"}}}
+{"components":{"foo":{"foo.html":"components/foo/foo.html"}},"elements":{"buttons":{"btn_primary.html":"elements/buttons/btn_primary.html","btn_secondary.html":"elements/buttons/btn_secondary.html"}},"templates":{"bar":{"bar.html":"templates/bar/bar.html"}}}

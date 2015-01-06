@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Patternz</title>
+</head>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<body ng-controller="AppCtrl as app">
+
+    <div id="content">
+        {{data.title}}
+    </div>
+
+    <ng-include src="'patterns/elements/buttons/btn-primary.html'" onload="data.text = 'button text' "></ng-include>
+
+    <script type="text/javascript" src="bower_components/angular/angular.min.js" ></script>
+    <script type="text/javascript" src="js/main.js" ></script>
+</body>
+</html>
+

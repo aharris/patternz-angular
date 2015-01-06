@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Patternz</title>
+</head>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body ng-controller="AppCtrl as app">
+
+    <div id="content">
+        {{data.title}}
+    </div>
+
+    <nav class="pz-nav">
+        <div ng-controller="PatternzCtrl as pz">
+            {{tree.elements.buttons["btn_primary.html"]}}
+        </div>
+    </nav>
+
+    <script type="text/javascript" src="../bower_components/angular/angular.min.js" ></script>
+    <script type="text/javascript" src="../js/main.js" ></script>
+    <script type="text/javascript" src="js/patternz.js" ></script>
+</body>
+</html>
+

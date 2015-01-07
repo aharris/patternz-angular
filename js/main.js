@@ -51,7 +51,6 @@
 
                 if (secondKey[0] === $location.$$path.substr(1)) {
                     $scope.currentPatterns = _.values( _.values($scope.tree[keys[i]])[0] );
-                    // $scope.currentPattern = currentPatternObj[0];
                     console.log('currentItem: ' + $scope.currentPatterns);
                 }
                 // console.log('key: ' + secondKey[0]);

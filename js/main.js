@@ -46,7 +46,7 @@
                     }
                 }
             }
-            console.log($scope.path);
+            // console.log($scope.path);
         };
 
     }]);
@@ -59,7 +59,7 @@
 
         $http.get('data/tree.json').success(function (data) {
             $scope.tree = data;
-            console.log(data);
+            // console.log(data);
 
             $scope.getCurrentPattern();
         });
@@ -75,7 +75,7 @@
 
                 if (secondKey[0] === $location.$$path.substr(1)) {
                     $scope.currentPatterns = _.values( _.values($scope.tree[keys[i]])[0] );
-                    console.log('currentItem: ' + $scope.currentPatterns);
+                    // console.log('currentItem: ' + $scope.currentPatterns);
                 }
                 // console.log('key: ' + keys[i] + '/' + secondKey[0]);
                 // console.log('path: ' + $location.$$path.substr(1));

@@ -8,10 +8,15 @@ var gulp = require('gulp'),
 
 
 gulp.task('stylus', function () {
-  gulp.src('./styl/main.styl')
-    .pipe(stylus({use: [nib()]}))
-    .pipe(gulp.dest('./css'))
-    .pipe(connect.reload());
+    gulp.src(['./styl/*.styl', '!styl/**/_*'])
+        .pipe(stylus({use: [nib()]}))
+        .pipe(gulp.dest('./css'))
+        .pipe(connect.reload());
+
+    gulp.src(['./patternz/styl/*.styl', '!styl/**/_*'])
+        .pipe(stylus({use: [nib()]}))
+        .pipe(gulp.dest('./patternz/css'))
+        .pipe(connect.reload());
 });
 
 gulp.task('html', function () {
@@ -20,7 +25,7 @@ gulp.task('html', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['styl/**/*.styl'], ['stylus']);
+    gulp.watch(['styl/**/*.styl', './patternz/styl/*.styl'], ['stylus']);
     gulp.watch(['./**/*.html'], ['html']);
     gulp.watch(['./patterns/**/*.html'], ['tree']);
 });

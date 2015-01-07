@@ -3,29 +3,58 @@
 <head>
     <title>Patternz</title>
 </head>
+<!-- HighlightJS -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/github.min.css">
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+
+<!-- Bootstrap Docs -->
+<link rel="stylesheet" type="text/css" href="css/docs.min.css">
+
+<!-- External CSS -->
+<link rel="stylesheet" type="text/css" href="css/patternz.css">
 <link rel="stylesheet" type="text/css" href="../css/main.css">
 <body ng-controller="PatternzCtrl as pz">
 
-    <h1>{{data.title}}</h1>
-
-    <nav class="pz-nav">
-        <ul>
-            <li ng-repeat="(key, data) in tree track by $index">
-                {{key}}
-                <ul>
-                    <li ng-repeat="(key, data) in tree[key] track by $index">
-                        <a ng-href="#{{key}}">{{key}}</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="pz-menu-icon" ng-click="navActive=!navActive" ng-class="{'pz-nav-active': navActive}" role="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
     </nav>
 
-    <div class="main" ng-view></div>
+    <div class="wrapper" ng-class="{'pz-nav-active': navActive}">
+
+        <nav class="pz-nav">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" ng-repeat="(key, data) in tree track by $index">
+                    {{key}}
+                    <ul class="nav nav-pills nav-stacked">
+                        <li ng-repeat="(key, data) in tree[key] track by $index">
+                            <a ng-href="#{{key}}" ng-click="$parent.$parent.navActive=!$parent.$parent.navActive">{{key}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="container"
+
+            <h1>{{data.title}}</h1>
+
+            <div ng-view></div>
+        </div>
+    </div>
 
     <script type="text/javascript" src="../bower_components/underscore/underscore-min.js" ></script>
     <script type="text/javascript" src="../bower_components/angular/angular.min.js" ></script>
     <script type="text/javascript" src="../bower_components/angular-route/angular-route.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-highlightjs/angular-highlightjs.min.js" ></script>
     <script type="text/javascript" src="../js/main.js" ></script>
     <script type="text/javascript" src="js/patternz.js" ></script>
 </body>

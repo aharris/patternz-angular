@@ -1,8 +1,7 @@
 <div ng-controller="PatternzCtrl as pz">
-    Template
-
     <div ng-repeat="pattern in currentPatterns">
         <h2>{{pattern}}</h2>
+        <hr/>
         <ng-include src=" '../patterns/' + pattern "></ng-include>
     </div>
 </div>

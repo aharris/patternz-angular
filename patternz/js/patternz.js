@@ -1,9 +1,10 @@
 (function () {
     var pz = angular.module('pz', [
-        'ngRoute'
+        'ngRoute',
+        'hljs'
     ]);
 
-    pz.config(['$routeProvider', function ($routeProvider) {
+    pz.config(function ($routeProvider, hljsServiceProvider) {
         $routeProvider
             .when('/:pattern', {
                 templateUrl: 'template.html',
@@ -11,7 +12,12 @@
                 controllerAs: 'pz'
             })
             .otherwise({redirectTo: '/'});
-    }]);
+
+        hljsServiceProvider.setOptions({
+            // replace tab with 4 spaces
+            tabReplace: '    '
+        });
+    });
 
     // Pattern Library
     pz.controller('PatternzCtrl', ['$scope', '$http','$location', 'filterFilter', function ($scope, $http, $location, filterFilter) {
@@ -22,6 +28,8 @@
             $scope.tree = data;
             $scope.getCurrentPattern();
         });
+
+        $scope.navActive = false;
 
         $scope.getCurrentPattern = function () {
             var tree = $scope.tree,

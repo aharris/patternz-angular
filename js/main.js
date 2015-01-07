@@ -19,10 +19,34 @@
     }]);
 
     // Main App
-    app.controller('AppCtrl', ['$scope', function ($scope) {
+    app.controller('AppCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
         $scope.data = {
             title: 'Patternz'
+        };
+
+        $http.get('patternz/data/tree.json').success(function (data) {
+            $scope.mapData = data;
+            $scope.createPatternMap();
+        });
+
+        $scope.createPatternMap = function () {
+            var mapData = $scope.mapData,
+                keys = _.keys(mapData);
+
+            $scope.path = {};
+
+            for (var i = 0; i < keys.length; i++) {
+                var secondKeys = _.keys(mapData[keys[i]]);
+                for (var j = 0; j < secondKeys.length; j++ ) {
+                    var thirdKeys = _.keys(mapData[keys[i]][secondKeys[j]]);
+                    for (var k = 0; k < thirdKeys.length; k++) {
+                        var shortPath = thirdKeys[k].replace(/\.[^/.]+$/, "");
+                        $scope.path[shortPath] = 'patterns/' + mapData[ keys[i] ][ secondKeys[j] ][thirdKeys[k]];
+                    }
+                }
+            }
+            console.log($scope.path);
         };
 
     }]);
@@ -53,9 +77,10 @@
                     $scope.currentPatterns = _.values( _.values($scope.tree[keys[i]])[0] );
                     console.log('currentItem: ' + $scope.currentPatterns);
                 }
-                // console.log('key: ' + secondKey[0]);
+                // console.log('key: ' + keys[i] + '/' + secondKey[0]);
                 // console.log('path: ' + $location.$$path.substr(1));
             }
         };
+
     }]);
 })();

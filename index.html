@@ -8,9 +8,9 @@
 
     <h1>{{data.title}}</h1>
 
-    <ng-include src="'patterns/2.elements/buttons/btn_primary.html'" ng-repeat="text in ['Primary Button'] "></ng-include>
+    <ng-include src="path.btn_primary" ng-repeat="text in ['Primary Button'] "></ng-include>
 
-    <ng-include src="'patterns/2.elements/buttons/btn_secondary.html'" ng-repeat="opt in [{text: 'Secondary button', id: 'foo'}] "></ng-include>
+    <ng-include src="path.btn_secondary" ng-repeat="opt in [{text: 'Secondary button', id: 'foo'}] "></ng-include>
 
     <script type="text/javascript" src="bower_components/underscore/underscore-min.js" ></script>
     <script type="text/javascript" src="bower_components/angular/angular.min.js" ></script>

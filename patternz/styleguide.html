@@ -4,12 +4,12 @@
     <title>Patternz</title>
 </head>
 <link rel="stylesheet" type="text/css" href="../css/main.css">
-<body ng-controller="AppCtrl as app">
+<body ng-controller="PatternzCtrl as pz">
 
     <h1>{{data.title}}</h1>
 
     <nav class="pz-nav">
-        <ul ng-controller="PatternzCtrl as pz">
+        <ul>
             <li ng-repeat="(key, data) in tree track by $index">
                 {{key}}
                 <ul>

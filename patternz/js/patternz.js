@@ -20,7 +20,7 @@
     });
 
     // Pattern Library
-    pz.controller('PatternzCtrl', ['$scope', '$http','$location', 'filterFilter', function ($scope, $http, $location, filterFilter) {
+    pz.controller('PatternzCtrl', ['$scope', '$http','$location', 'filterFilter', '$anchorScroll', function ($scope, $http, $location, filterFilter, $anchorScroll) {
 
         $scope.tree = 'foo';
 
@@ -51,6 +51,19 @@
 
                 }
             }
+        };
+
+        $scope.gotoAnchor = function(x) {
+          var newHash = 'anchor' + x;
+          if ($location.hash() !== newHash) {
+            // set the $location.hash to `newHash` and
+            // $anchorScroll will automatically scroll to it
+            $location.hash(x);
+          } else {
+            // call $anchorScroll() explicitly,
+            // since $location.hash hasn't changed
+            $anchorScroll();
+          }
         };
 
     }]);

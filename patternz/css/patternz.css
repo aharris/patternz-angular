@@ -13,6 +13,9 @@
   top: 18px;
   cursor: pointer;
 }
+.pz-menu-icon.pz-nav-active span {
+  background: #d9534f;
+}
 .pz-menu-icon.pz-nav-active span:first-child {
   transform: rotate3d(0, 0, 1, 45deg) translate3d(5px, 6px, 0);
 }
@@ -23,7 +26,7 @@
   transform: rotate3d(0, 0, 1, -45deg) translate3d(5px, -6px, 0);
 }
 .pz-menu-icon span {
-  background: #00f;
+  background: #3782c4;
   border-radius: 4px;
   display: block;
   height: 4px;

@@ -6,6 +6,11 @@
 
     pz.config(function ($routeProvider, hljsServiceProvider) {
         $routeProvider
+            .when('/', {
+                templateUrl: 'overview.html',
+                controller: 'PatternzCtrl',
+                controllerAs: 'pz'
+            })
             .when('/:pattern', {
                 templateUrl: 'template.html',
                 controller: 'PatternzCtrl',

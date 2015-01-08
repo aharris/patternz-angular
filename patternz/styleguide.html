@@ -32,7 +32,8 @@
 
         <nav class="pz-nav">
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation" ng-repeat="(key, data) in tree track by $index">
+                <li><a href="#/" ng-click="navActive=!navActive">Overview</a></li>
+                <li ng-repeat="(key, data) in tree track by $index">
                     {{key}}
                     <ul class="nav nav-pills nav-stacked">
                         <li ng-repeat="(key, data) in tree[key] track by $index">

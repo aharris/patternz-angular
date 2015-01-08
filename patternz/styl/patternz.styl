@@ -22,6 +22,7 @@ transition(val)
     cursor pointer
     &.pz-nav-active
         span
+            background $brand-danger
             &:first-child
               transform rotate3d(0,0,1,45deg) translate3d(5px,6px,0)
             &:nth-child(2)
@@ -30,7 +31,7 @@ transition(val)
                 transform rotate3d(0,0,1,-45deg) translate3d(5px,-6px,0)
 
     span
-        background blue
+        background $brand-primary
         border-radius 4px
         display block
         height 4px

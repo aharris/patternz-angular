@@ -41,6 +41,12 @@
 }
 .color-swatch {
   text-align: center;
-  line-height: 100px;
+  line-height: 60px;
   width: 100%;
+  color: #eee;
+}
+@media (min-width: 768px) {
+  .color-swatch {
+    line-height: 100px;
+  }
 }

@@ -1,7 +1,7 @@
 <div ng-controller="PatternzCtrl as pz">
     <h1 class="pz-group-header">{{patternGroup}}</h1>
     <div ng-repeat="pattern in currentPatterns">
-        <h2 class="pz-pattern-header">{{patternTitle}}</h2>
+        <h2 class="pz-pattern-header">{{patternTitle[$index]}}</h2>
         <hr/>
         <ng-include src=" '../patterns/' + pattern "></ng-include>
         <div class="clearfix"></div>

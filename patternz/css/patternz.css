@@ -48,6 +48,10 @@
   width: 100%;
   color: #eee;
 }
+.pz-group-header,
+.pz-pattern-header {
+  text-transform: capitalize;
+}
 @media (min-width: 768px) {
   .color-swatch {
     line-height: 100px;

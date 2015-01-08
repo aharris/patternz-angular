@@ -50,6 +50,7 @@
             $scope.currentPatterns = {};
             $scope.path = {};
             $scope.patternTitle = [];
+            $scope.shortPath = [];
 
             for (var i = 0; i < keys.length; i++) {
                 var secondKeys = _.keys(tree[keys[i]]);
@@ -59,11 +60,11 @@
                         $scope.currentPatterns = _.values( _.values($scope.tree[keys[i]])[j] );
                         var thirdKeys = _.keys(tree[keys[i]][secondKeys[j]]);
                         for (var k = 0; k < thirdKeys.length; k++) {
-                            var shortPath = thirdKeys[k].replace(/\.[^/.]+$/, "");
+                            $scope.shortPath[k] = thirdKeys[k].replace(/\.[^/.]+$/, "");
 
-                            $scope.patternTitle[k] = shortPath.replace(/_/, " ");
-                            $scope.path[shortPath] = 'patterns/' + tree[ keys[i] ][ secondKeys[j] ][thirdKeys[k]];
-                            $scope.createMarkup(k, shortPath);
+                            $scope.patternTitle[k] = $scope.shortPath[k].replace(/_/, " ");
+                            $scope.path[$scope.shortPath[k]] = 'patterns/' + tree[ keys[i] ][ secondKeys[j] ][thirdKeys[k]];
+                            $scope.createMarkup(k, $scope.shortPath[k]);
                         }
                     }
 

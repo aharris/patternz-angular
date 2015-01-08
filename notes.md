@@ -7,3 +7,5 @@
 ## Passing attributes to html via ng-include
 
 ## Creating the tree structure
+
+## Creating the code snippets for docs

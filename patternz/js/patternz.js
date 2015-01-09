@@ -92,13 +92,25 @@
             $http.get('../' + $scope.path[shortPath]).success(function (data) {
                 var opts = data.match(/opt.\w*/g) || '',
                     ngTemplate,
-                    ngRepeat;
+                    ngRepeat,
+                    lines,
+                    optArray = [];
+
+                showAllOptions(idx, data);
+
 
                 $scope.opts = {};
                 $scope.opts[idx] = '';
 
                 for (var i = 0; i < opts.length; i++) {
                     var opt = opts[i].split('.').splice(1);
+
+                    //If key exists already don't add it again
+                    if (optArray.indexOf(opt[0]) > -1) {
+                        continue;
+                    }
+                    optArray.push(opt[0]);
+
                     if (i === 0) {
                         $scope.opts[idx] += opt[0] + ': "string' + i + '"';
                     } else {
@@ -114,10 +126,30 @@
                 $scope.ngMarkup[idx] = ngTemplate;
 
                 //HTML File
+                lines = data.split("\n").join("\n\n");
                 $scope.htmlMarkup = $scope.htmlMarkup || {};
-                $scope.htmlMarkup[idx] = data;
+                $scope.htmlMarkup[idx] = lines;
             });
         };
+
+        function showAllOptions(idx, data) {
+            var conditionalOpts = data.match(/ng-if="opt.\w*/g) || null;
+            if (conditionalOpts === null) {
+                $scope.conditionalOpts[idx] = false;
+                return false;
+            }
+            var optsObj = optsObj || {};
+
+            optsObj[idx] = optsObj[idx] || [];
+
+            for (var i = 0; i < conditionalOpts.length; i++) {
+                var opt = conditionalOpts[i].split('.').splice(1);
+                optsObj[idx].push(_.object([opt[0]], [true]));
+            }
+
+            $scope.conditionalOpts = $scope.conditionalOpts || {};
+            $scope.conditionalOpts[idx] = _.uniq(optsObj[idx]);
+        }
 
     }]);
 })();

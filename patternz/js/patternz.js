@@ -102,9 +102,9 @@
                     var opt = opts[i].split('.').splice(1);
 
                     if (i === 0) {
-                        $scope.opts[idx] += opt[0] + ': "string' + i + '"';
+                        $scope.opts[idx] += ' ' + opt[0] + ': __val__';
                     } else {
-                        $scope.opts[idx] += ',\n ' + opt[0] + ': "string' + i + '"';
+                        $scope.opts[idx] += ',\n ' + opt[0] + ': __val__';
                     }
                 }
 

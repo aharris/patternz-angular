@@ -91,13 +91,9 @@
         $scope.createMarkup = function(idx, shortPath) {
             $http.get('../' + $scope.path[shortPath]).success(function (data) {
                 var opts = data.match(/opt.\w*/g) || '',
-                    ngTemplate,
-                    ngRepeat,
-                    lines,
                     optArray = [];
 
                 showAllOptions(idx, data);
-
 
                 $scope.opts = {};
                 $scope.opts[idx] = '';
@@ -118,20 +114,40 @@
                     }
                 }
 
-                //ng-include
-                ngRepeat = opts ? '" ng-repeat="opt in [{' + $scope.opts[idx] +'}]' : '';
-                ngTemplate = '<ng-include src="path.' + shortPath + ngRepeat +'"></ng-include>';
-
-                $scope.ngMarkup = $scope.ngMarkup || {};
-                $scope.ngMarkup[idx] = ngTemplate;
-
-                //HTML File
-                lines = data.split("\n").join("\n\n");
-                $scope.htmlMarkup = $scope.htmlMarkup || {};
-                $scope.htmlMarkup[idx] = lines;
+                generateUsageMarkup(opts, shortPath, idx);
+                generateHtmlMarkup(data, idx);
             });
         };
 
+        // data - Partial html file
+        // idx - the index of the current pattern being iterated
+        function generateHtmlMarkup(data, idx) {
+            var lines;
+
+            lines = data.split("\n").join("\n\n");
+            $scope.htmlMarkup = $scope.htmlMarkup || {};
+            $scope.htmlMarkup[idx] = lines;
+
+        }
+
+        //Params:
+        // opts - array of options passed in the partial html file
+        // shortPath - name of the html file to be included
+        // idx - the index of the current pattern being iterated
+        function generateUsageMarkup(opts, shortPath, idx) {
+            var ngRepeat,
+                ngTemplate;
+
+            ngRepeat = opts ? '" ng-repeat="opt in [{' + $scope.opts[idx] +'}]' : '';
+            ngTemplate = '<ng-include src="path.' + shortPath + ngRepeat +'"></ng-include>';
+
+            $scope.ngMarkup = $scope.ngMarkup || {};
+            $scope.ngMarkup[idx] = ngTemplate;
+        }
+
+        //Params:
+        // idx - the index of the current pattern being iterated
+        // data - Partial html file
         function showAllOptions(idx, data) {
             var conditionalOpts = data.match(/ng-if="opt.\w*/g) || null;
             if (conditionalOpts === null) {

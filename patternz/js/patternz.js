@@ -91,26 +91,20 @@
         $scope.createMarkup = function(idx, shortPath) {
             $http.get('../' + $scope.path[shortPath]).success(function (data) {
                 var opts = data.match(/opt.\w*/g) || '',
-                    optArray = [];
+                    uniqOpts = _.uniq(opts);
 
                 showAllOptions(idx, data);
 
                 $scope.opts = {};
                 $scope.opts[idx] = '';
 
-                for (var i = 0; i < opts.length; i++) {
+                for (var i = 0; i < uniqOpts.length; i++) {
                     var opt = opts[i].split('.').splice(1);
-
-                    //If key exists already don't add it again
-                    if (optArray.indexOf(opt[0]) > -1) {
-                        continue;
-                    }
-                    optArray.push(opt[0]);
 
                     if (i === 0) {
                         $scope.opts[idx] += opt[0] + ': "string' + i + '"';
                     } else {
-                        $scope.opts[idx] += ', ' + opt[0] + ': "string' + i + '"';
+                        $scope.opts[idx] += ',\n ' + opt[0] + ': "string' + i + '"';
                     }
                 }
 
@@ -138,7 +132,7 @@
             var ngRepeat,
                 ngTemplate;
 
-            ngRepeat = opts ? '" ng-repeat="opt in [{' + $scope.opts[idx] +'}]' : '';
+            ngRepeat = opts ? '" ng-repeat="opt in [{\n' + $scope.opts[idx] +'\n}]' : '';
             ngTemplate = '<ng-include src="path.' + shortPath + ngRepeat +'"></ng-include>';
 
             $scope.ngMarkup = $scope.ngMarkup || {};

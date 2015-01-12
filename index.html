@@ -12,12 +12,12 @@
 
         <h1>{{data.title}}</h1>
 
-        <ng-include src="path.btn_primary" ng-repeat="opt in [{
+        <ng-include src="path.button" ng-repeat="opt in [{
             anchor: true,
             text: 'Primary Button'
         }]"></ng-include>
 
-        <ng-include src="path.btn_default" ng-repeat="opt in [{
+        <ng-include src="path.button" ng-repeat="opt in [{
             input: true,
             type: 'button',
             text: 'Input'

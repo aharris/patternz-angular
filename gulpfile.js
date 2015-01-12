@@ -4,7 +4,11 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     watch = require('gulp-watch'),
     connect = require('gulp-connect'),
-    directoryMap = require("gulp-directory-map");
+    directoryMap = require("gulp-directory-map"),
+    data = require('gulp-data'),
+    gutil = require('gulp-util'),
+    map = require('vinyl-map'),
+    rename = require("gulp-rename");
 
 
 gulp.task('stylus', function () {
@@ -31,11 +35,38 @@ gulp.task('watch', function () {
 });
 
 gulp.task('tree', function () {
-    gulp.src('patterns/**/*.html')
+    gulp.src('tmp/patterns/**/*.html')
       .pipe(directoryMap({
         filename: 'tree.json'
       }))
       .pipe(gulp.dest('patternz/data'));
+});
+
+gulp.task('patternz', function () {
+    var fname;
+    var getMarkup = map(function(code, filename) {
+        // file contents are handed
+        // over as buffers
+        fname = filename;
+
+        code = code.toString();
+
+        var arr = code.split('---');
+
+        // Last item in array is the code
+        // AKA anything after last "---"
+        return arr[arr.length - 1].trim();
+
+    });
+
+    gulp.src('patterns/**/*.md')
+        .pipe(getMarkup)
+        .pipe(rename(function (path) {
+            path.extname = ".html";
+        }))
+        // .on('error', errorHandler)
+        .pipe(gulp.dest("tmp/patterns"));
+
 });
 
 gulp.task('connect', function() {
@@ -45,10 +76,17 @@ gulp.task('connect', function() {
     });
 });
 
-
 gulp.task('default', [
     'stylus',
+    'patternz',
     'tree',
     'connect',
     'watch'
 ]);
+
+
+// Handle the error
+function errorHandler (error) {
+  console.log(error.toString());
+  this.emit('end');
+}

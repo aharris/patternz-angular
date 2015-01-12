@@ -16,10 +16,10 @@
         </div>
 
         <div ng-if="conditionalOpts[$index].length > 0">
-            <ng-include src=" '../patterns/' + pattern " ng-repeat="opt in conditionalOpts[$index] "></ng-include>
+            <ng-include src=" '../tmp/patterns/' + pattern " ng-repeat="opt in conditionalOpts[$index] "></ng-include>
         </div>
         <div ng-if="!conditionalOpts[$index]">
-            <ng-include src=" '../patterns/' + pattern "></ng-include>
+            <ng-include src=" '../tmp/patterns/' + pattern "></ng-include>
         </div>
 
         <div class="clearfix"></div>

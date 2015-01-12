@@ -64,7 +64,8 @@
 
                             $scope.patternTitle[k] = $scope.shortPath[k].replace(/_/, " ");
                             $scope.path[$scope.shortPath[k]] = 'patterns/' + tree[ keys[i] ][ secondKeys[j] ][thirdKeys[k]];
-                            $scope.createMarkup(k, $scope.shortPath[k]);
+                            // $scope.createMarkup(k, $scope.shortPath[k]);
+                            $scope.parsePatternDoc(k, $scope.shortPath[k]);
                         }
                     }
 
@@ -85,42 +86,55 @@
           }
         };
 
-        //Params:
-        // idx - the index of the current pattern being iterated
-        // shortPath - name of the html file to be included
-        $scope.createMarkup = function(idx, shortPath) {
-            $http.get('../' + $scope.path[shortPath]).success(function (data) {
-                var opts = data.match(/opt.\w*/g) || '',
-                    uniqOpts = _.uniq(opts);
-
-                showAllOptions(idx, data);
+        $scope.parsePatternDoc = function(idx, shortPath) {
+            $http.get('../' + $scope.path[shortPath].replace(/.html/, ".md") ).success(function (data) {
+                var mdContent = data.split('---');
+                var docSections = mdContent[1].split("\n\n"),
+                    patternName = '',
+                    patternDesc = '';
 
                 $scope.opts = {};
-                $scope.opts[idx] = '';
 
-                for (var i = 0; i < uniqOpts.length; i++) {
-                    var opt = opts[i].split('.').splice(1);
+                for (var i = 0; i < docSections.length; i++) {
+                    section = docSections[i].split(':\n');
 
-                    if (i === 0) {
-                        $scope.opts[idx] += ' ' + opt[0] + ': __val__';
-                    } else {
-                        $scope.opts[idx] += ',\n ' + opt[0] + ': __val__';
+                    if (section[0].toLowerCase().trim() === 'name') {
+                        patternName = section[1];
+                    } else if (section[0].toLowerCase().trim() === 'options') {
+                        $scope.opts[idx] = section[1];
+                    } else if (section[0].toLowerCase().trim() === 'description') {
+                        patternDesc = section[1];
                     }
                 }
 
-                generateUsageMarkup(opts, shortPath, idx);
-                generateHtmlMarkup(data, idx);
+                generateUsageMarkup(shortPath, idx);
+                generateHtmlMarkup(shortPath, idx);
+
+                // console.log('patternName: ' + patternName);
+                // console.log('patternOpts: ' + patternOpts);
+                // console.log('patternDesc: ' + patternDesc);
+
             });
         };
 
+
         // data - Partial html file
         // idx - the index of the current pattern being iterated
-        function generateHtmlMarkup(data, idx) {
-            var lines;
+        function generateHtmlMarkup(shortPath, idx) {
+            var lines,
+                markupPath = $scope.path[shortPath].replace(/.md/, ".html");
 
-            lines = data.split("\n").join("\n\n");
-            $scope.htmlMarkup = $scope.htmlMarkup || {};
-            $scope.htmlMarkup[idx] = lines;
+            // console.log(markupPath);
+             $http.get('../tmp/' + markupPath).success(function (data) {
+                // debugger;
+
+                showAllOptions(idx, data);
+
+
+                lines = data.split("\n").join("\n\n");
+                $scope.htmlMarkup = $scope.htmlMarkup || {};
+                $scope.htmlMarkup[idx] = lines;
+            });
 
         }
 
@@ -128,11 +142,11 @@
         // opts - array of options passed in the partial html file
         // shortPath - name of the html file to be included
         // idx - the index of the current pattern being iterated
-        function generateUsageMarkup(opts, shortPath, idx) {
+        function generateUsageMarkup(shortPath, idx) {
             var ngRepeat,
                 ngTemplate;
 
-            ngRepeat = opts ? '" ng-repeat="opt in [{\n' + $scope.opts[idx] +'\n}]' : '';
+            ngRepeat = $scope.opts ? '" ng-repeat="opt in [{\n' + $scope.opts[idx] +'\n}]' : '';
             ngTemplate = '<ng-include src="path.' + shortPath + ngRepeat +'"></ng-include>';
 
             $scope.ngMarkup = $scope.ngMarkup || {};

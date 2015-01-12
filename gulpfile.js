@@ -31,7 +31,8 @@ gulp.task('html', function () {
 gulp.task('watch', function () {
     gulp.watch(['styl/**/*.styl', './patternz/styl/*.styl'], ['stylus']);
     gulp.watch(['./**/*.html'], ['html']);
-    gulp.watch(['./patterns/**/*.html'], ['tree']);
+    gulp.watch(['./tmp/patterns/**/*.html'], ['tree']);
+    gulp.watch(['./patterns/**/*.md'], ['patternz']);
 });
 
 gulp.task('tree', function () {

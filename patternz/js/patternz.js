@@ -88,10 +88,16 @@
 
         $scope.parsePatternDoc = function(idx, shortPath) {
             $http.get('../' + $scope.path[shortPath].replace(/.html/, ".md") ).success(function (data) {
-                var mdContent = data.split('---');
-                var docSections = mdContent[1].split("\n\n"),
+                var mdContent = data.split('---'),
+                    docSections,
                     patternName = '',
                     patternDesc = '';
+
+                if (mdContent.length <= 1) {
+                    return;
+                }
+
+                docSections = mdContent[1].split("\n\n");
 
                 $scope.opts = {};
 

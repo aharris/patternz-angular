@@ -13,6 +13,11 @@ style: string // Values: default, primary, success, info, warning, danger, link 
 
 Description:
 We are buttons
+
+Example:
+anchor: true,
+text: 'primary button',
+style: 'primary'
 ---
 <a ng-if="opt.anchor" href="{{opt.href || 'javascript:;'}}" class="btn btn-{{opt.style || 'default'}}">{{opt.text || 'Anchor'}}</a>
 <button ng-if="opt.button" class="btn btn-{{opt.style || 'default'}}" type="{{opt.type}}">{{opt.text || 'Button'}}</button>

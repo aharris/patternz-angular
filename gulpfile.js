@@ -8,7 +8,9 @@ var gulp = require('gulp'),
     data = require('gulp-data'),
     gutil = require('gulp-util'),
     map = require('vinyl-map'),
-    rename = require("gulp-rename");
+    rename = require("gulp-rename"),
+    runSequence = require('run-sequence'),
+    clean = require('gulp-clean');
 
 
 gulp.task('stylus', function () {
@@ -33,6 +35,11 @@ gulp.task('watch', function () {
     gulp.watch(['./**/*.html'], ['html']);
     gulp.watch(['./tmp/patterns/**/*.html'], ['tree']);
     gulp.watch(['./patterns/**/*.md'], ['patternz']);
+});
+
+gulp.task('clean', function () {
+    return gulp.src('tmp/patterns', {read: false})
+        .pipe(clean());
 });
 
 gulp.task('tree', function () {
@@ -60,7 +67,7 @@ gulp.task('patternz', function () {
 
     });
 
-    gulp.src('patterns/**/*.md')
+    return gulp.src('patterns/**/*.md')
         .pipe(getMarkup)
         .pipe(rename(function (path) {
             path.extname = ".html";
@@ -77,13 +84,12 @@ gulp.task('connect', function() {
     });
 });
 
-gulp.task('default', [
-    'stylus',
-    'patternz',
-    'tree',
-    'connect',
-    'watch'
-]);
+gulp.task('default', function(callback) {
+    runSequence('clean',
+        ['stylus', 'patternz'],
+        ['tree', 'connect', 'watch'],
+        callback);
+});
 
 
 // Handle the error

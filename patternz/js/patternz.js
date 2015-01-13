@@ -1,4 +1,5 @@
 (function () {
+    'use strict';
     var pz = angular.module('pz', [
         'ngRoute',
         'hljs'
@@ -102,7 +103,7 @@
                 $scope.opts = {};
 
                 for (var i = 0; i < docSections.length; i++) {
-                    section = docSections[i].split(':\n');
+                    var section = docSections[i].split(':\n');
 
                     if (section[0].toLowerCase().trim() === 'name') {
                         patternName = section[1];

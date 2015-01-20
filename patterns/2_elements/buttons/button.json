@@ -1,0 +1,85 @@
+{
+    "name" : "Buttons",
+    "Description" : "We are buttons.",
+    "allOptions" : [
+        {
+            "anchor" : {
+                "val" : "boolean"
+            }
+        },
+        {
+            "button" : {
+                "val": "boolean"
+            }
+        },
+        {
+            "input" : {
+                "val": "boolean"
+            }
+        },
+        {
+            "type" : {
+                "val" : "string",
+                "comment" : "Values: button, submit | Default: button | Should only be used if input is true"
+            }
+        },
+        {
+            "href" : {
+                "val" : "string"
+            }
+        },
+        {
+            "text" : {
+                "val" : "string"
+            }
+        },
+        {
+            "style" : {
+                "val" : "string",
+                "comment" : "Values: default, primary, success, info, warning, danger, link | default: default"
+            }
+        }
+    ],
+    "examples" : [
+        {
+            "example" : "Styles",
+            "options" : [
+                [{
+                    "anchor" : true,
+                    "text" : "Default",
+                    "style" : "default"
+                }],
+                [{
+                    "anchor" : true,
+                    "text" : "Primary",
+                    "style" : "primary"
+                }],
+                [{
+                    "anchor" : true,
+                    "text" : "Success",
+                    "style" : "success"
+                }],
+                [{
+                    "anchor" : true,
+                    "text" : "Info",
+                    "style" : "info"
+                }],
+                [{
+                    "anchor" : true,
+                    "text" : "Warning",
+                    "style" : "warning"
+                }],
+                [{
+                    "anchor" : true,
+                    "text" : "Danger",
+                    "style" : "danger"
+                }],
+                [{
+                    "anchor" : true,
+                    "text" : "Link",
+                    "style" : "link"
+                }]
+            ]
+        }
+    ]
+}

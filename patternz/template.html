@@ -41,10 +41,12 @@
             </pre>
         </div>
 
-        <h2>Example Name</h2>
         <span ng-repeat="example in examples">
-            <!-- {{pattern}} -->
-            <ng-include src=" '../tmp/patterns/' + pattern " ng-repeat="opt in example"></ng-include>
+            <h2>Example Name</h2>
+            <span ng-repeat="option in example.options">
+                <!-- {{pattern}} -->
+                <ng-include src=" '../tmp/patterns/' + pattern " ng-repeat="opt in option"></ng-include>
+            </span>
         </span>
 
     </div>

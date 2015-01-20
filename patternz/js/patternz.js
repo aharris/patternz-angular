@@ -1,5 +1,6 @@
 (function () {
     'use strict';
+
     var pz = angular.module('pz', [
         'ngRoute',
         'hljs'
@@ -65,7 +66,6 @@
 
                             $scope.patternTitle[k] = $scope.shortPath[k].replace(/_/, " ");
                             $scope.path[$scope.shortPath[k]] = 'patterns/' + tree[ keys[i] ][ secondKeys[j] ][thirdKeys[k]];
-                            // $scope.createMarkup(k, $scope.shortPath[k]);
                             $scope.parsePatternDoc(k, $scope.shortPath[k]);
                         }
                     }
@@ -92,7 +92,8 @@
                 var mdContent = data.split('---'),
                     docSections,
                     patternName = '',
-                    patternDesc = '';
+                    patternDesc = '',
+                    examples = [];
 
                 if (mdContent.length <= 1) {
                     return;
@@ -105,24 +106,44 @@
                 for (var i = 0; i < docSections.length; i++) {
                     var section = docSections[i].split(':\n');
 
-                    if (section[0].toLowerCase().trim() === 'name') {
-                        patternName = section[1];
-                    } else if (section[0].toLowerCase().trim() === 'options') {
-                        $scope.opts[idx] = section[1];
-                    } else if (section[0].toLowerCase().trim() === 'description') {
-                        patternDesc = section[1];
+                    switch (section[0].toLowerCase().trim()) {
+                        case 'name':
+                            patternName = section[1];
+                            break;
+                        case 'all options':
+                            $scope.opts[idx] = section[1];
+                            break;
+                        case 'description':
+                            patternDesc = section[1];
+                            break;
+                        case 'options':
+                            // examples.push(section[1]);
+                            createExamples(examples, section[1]);
+                            break;
+                        default:
+                            console.log('Uncaptured document title!: ' + section[0]);
                     }
                 }
 
                 generateUsageMarkup(shortPath, idx);
                 generateHtmlMarkup(shortPath, idx);
 
-                // console.log('patternName: ' + patternName);
-                // console.log('patternOpts: ' + patternOpts);
-                // console.log('patternDesc: ' + patternDesc);
-
             });
         };
+
+        // Params:
+        // examples - array of examples in docs.
+        // opts - string of options.
+        function createExamples(examples, opts) {
+
+            var anObject = eval("0||[{"+ opts+ "}]") ;
+
+            examples.push(anObject);
+
+            $scope.examples = examples;
+            console.log(examples);
+
+        }
 
 
         // data - Partial html file
@@ -131,12 +152,9 @@
             var lines,
                 markupPath = $scope.path[shortPath].replace(/.md/, ".html");
 
-            // console.log(markupPath);
-             $http.get('../tmp/' + markupPath).success(function (data) {
-                // debugger;
+            $http.get('../tmp/' + markupPath).success(function (data) {
 
                 showAllOptions(idx, data);
-
 
                 lines = data.split("\n").join("\n\n");
                 $scope.htmlMarkup = $scope.htmlMarkup || {};
@@ -145,7 +163,7 @@
 
         }
 
-        //Params:
+        // Params:
         // opts - array of options passed in the partial html file
         // shortPath - name of the html file to be included
         // idx - the index of the current pattern being iterated

@@ -1,7 +1,6 @@
 <div ng-controller="PatternzCtrl as pz">
     <div class="page-header">
         <h1 class="pz-group-header">{{patternGroup}}</h1>
-        <!-- {{currentPatterns.length}} -->
         <nav ng-if="currentPatterns.length > 1">
             <ul class="nav nav-pills">
                 <li ng-repeat="pattern in currentPatterns">
@@ -16,21 +15,21 @@
         </div>
 
         <div ng-if="conditionalOpts[$index].length > 0">
-            <ng-include src=" '../tmp/patterns/' + pattern " ng-repeat="opt in conditionalOpts[$index] "></ng-include>
+            <ng-include src=" '../patterns/' + pattern " ng-repeat="opt in conditionalOpts[$index] "></ng-include>
         </div>
         <div ng-if="!conditionalOpts[$index]">
-            <ng-include src=" '../tmp/patterns/' + pattern "></ng-include>
+            <ng-include src=" '../patterns/' + pattern "></ng-include>
         </div>
 
         <div class="clearfix"></div>
         <br/>
         <br/>
 
-        <div ng-hide="patternGroup = noMarkup.{{patternGroup}}">
+        <div ng-hide="hideMarkup">
 
             <p>Usage:</p>
             <pre class="hljs">
-{{ngMarkup[$index]}}
+{{ngMarkup}}
             </pre>
             <br/>
             <br/>
@@ -41,13 +40,13 @@
             </pre>
         </div>
 
-        <span ng-repeat="example in examples">
-            <h2>Example Name</h2>
+        <div ng-repeat="example in examples">
+            <h2>{{example.name}}</h2>
             <span ng-repeat="option in example.options">
                 <!-- {{pattern}} -->
-                <ng-include src=" '../tmp/patterns/' + pattern " ng-repeat="opt in option"></ng-include>
+                <ng-include src=" '../patterns/' + pattern " ng-repeat="opt in option"></ng-include>
             </span>
-        </span>
+        </div>
 
     </div>
 </div>

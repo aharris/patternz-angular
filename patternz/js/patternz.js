@@ -29,13 +29,6 @@
     // Pattern Library
     pz.controller('PatternzCtrl', ['$scope', '$http','$location', 'filterFilter', '$anchorScroll', function ($scope, $http, $location, filterFilter, $anchorScroll) {
 
-        // Files included here will not have markup in docs
-        $scope.noMarkup = {
-            colors: true,
-            grids: true,
-            typography: true
-        };
-
         $scope.tree = {};
 
         $scope.patternGroup = '_';
@@ -66,7 +59,9 @@
                             $scope.shortPath[k] = thirdKeys[k].replace(/\.[^/.]+$/, "");
                             $scope.patternTitle[k] = $scope.shortPath[k].replace(/_/, " ");
                             $scope.path[$scope.shortPath[k]] = 'patterns/' + tree[ keys[i] ][ secondKeys[j] ][thirdKeys[k]];
-                            $scope.parsePatternDoc(k, $scope.shortPath[k]);
+
+                            generateHtmlMarkup($scope.shortPath[k], k);
+
                             $scope.patternData = '../' + $scope.path[$scope.shortPath[k]].replace(".html", ".json");
                         }
                     }
@@ -86,6 +81,9 @@
             $scope.patternGroup = data.name;
             $scope.opts = data.allOptions;
             $scope.examples = data.examples;
+            $scope.hideMarkup = data.hideMarkup;
+
+            generateUsageMarkup(data.name);
         };
 
         $scope.gotoAnchor = function(x) {
@@ -101,30 +99,13 @@
           }
         };
 
-        $scope.parsePatternDoc = function(idx, shortPath) {
-            $http.get('../' + $scope.path[shortPath].replace(/.html/, ".md") ).success(function (data) {
-                var mdContent = data.split('---'),
-                    docSections;
-
-                if (mdContent.length <= 1) {
-                    return;
-                }
-
-                docSections = mdContent[1].split("\n\n");
-
-                generateUsageMarkup(shortPath, idx);
-                generateHtmlMarkup(shortPath, idx);
-
-            });
-        };
-
         // data - Partial html file
         // idx - the index of the current pattern being iterated
         function generateHtmlMarkup(shortPath, idx) {
             var lines,
                 markupPath = $scope.path[shortPath].replace(/.md/, ".html");
 
-            $http.get('../tmp/' + markupPath).success(function (data) {
+            $http.get('../' + markupPath).success(function (data) {
 
                 showAllOptions(idx, data);
 
@@ -139,7 +120,7 @@
         // opts - array of options passed in the partial html file
         // shortPath - name of the html file to be included
         // idx - the index of the current pattern being iterated
-        function generateUsageMarkup(shortPath, idx) {
+        function generateUsageMarkup(shortPath) {
             var ngRepeat,
                 ngTemplate,
                 optString = '',
@@ -162,10 +143,10 @@
             }
 
             ngRepeat = $scope.opts ? '" ng-repeat="opt in [{\n' + optString +'\n}]' : '';
-            ngTemplate = '<ng-include src="path.' + shortPath + ngRepeat +'"></ng-include>';
+            ngTemplate = '<ng-include src="path.' + shortPath.toLowerCase() + ngRepeat +'"></ng-include>';
 
-            $scope.ngMarkup = $scope.ngMarkup || {};
-            $scope.ngMarkup[idx] = ngTemplate;
+            $scope.ngMarkup = ngTemplate;
+            // $scope.ngMarkup[idx] = ngTemplate;
         }
 
         //Params:
@@ -174,7 +155,9 @@
         function showAllOptions(idx, data) {
             var conditionalOpts = data.match(/ng-if="opt.\w*/g) || null;
             if (conditionalOpts === null) {
-                $scope.conditionalOpts[idx] = false;
+                if ($scope.conditionalOpts) {
+                    $scope.conditionalOpts[idx] = false;
+                }
                 return false;
             }
             var optsObj = optsObj || {};

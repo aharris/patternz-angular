@@ -42,7 +42,7 @@
     ],
     "examples" : [
         {
-            "example" : "Styles",
+            "name" : "Styles",
             "options" : [
                 [{
                     "anchor" : true,

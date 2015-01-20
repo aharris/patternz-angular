@@ -32,10 +32,10 @@
                     var thirdKeys = _.keys(mapData[keys[i]][secondKeys[j]]);
                     for (var k = 0; k < thirdKeys.length; k++) {
                         var shortPath = thirdKeys[k].replace(/\.[^/.]+$/, "");
-                        var generatedFile = thirdKeys[k].replace(/\.[^/.]+$/, ".html");
+                        // var generatedFile = thirdKeys[k].replace(/\.[^/.]+$/, ".html");
 
                         var convertedPath = mapData[ keys[i] ][ secondKeys[j] ][thirdKeys[k]].replace(/.md/, ".html");
-                        $scope.path[shortPath] = 'tmp/patterns/' + convertedPath;
+                        $scope.path[shortPath] = 'patterns/' + convertedPath;
                     }
                 }
             }

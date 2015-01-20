@@ -33,49 +33,49 @@ gulp.task('html', function () {
 gulp.task('watch', function () {
     gulp.watch(['styl/**/*.styl', './patternz/styl/*.styl'], ['stylus']);
     gulp.watch(['./**/*.html'], ['html']);
-    gulp.watch(['./tmp/patterns/**/*.html'], ['tree']);
-    gulp.watch(['./patterns/**/*.md'], ['patternz']);
+    gulp.watch(['./patterns/**/*.html'], ['tree']);
+    // gulp.watch(['./patterns/**/*.html'], ['patternz']);
 });
 
-gulp.task('clean', function () {
-    return gulp.src('tmp/patterns', {read: false})
-        .pipe(clean());
-});
+// gulp.task('clean', function () {
+//     return gulp.src('tmp/patterns', {read: false})
+//         .pipe(clean());
+// });
 
 gulp.task('tree', function () {
-    gulp.src('tmp/patterns/**/*.html')
+    gulp.src('patterns/**/*.html')
       .pipe(directoryMap({
         filename: 'tree.json'
       }))
       .pipe(gulp.dest('patternz/data'));
 });
 
-gulp.task('patternz', function () {
-    var fname;
-    var getMarkup = map(function(code, filename) {
-        // file contents are handed
-        // over as buffers
-        fname = filename;
+// gulp.task('patternz', function () {
+//     var fname;
+//     var getMarkup = map(function(code, filename) {
+//         // file contents are handed
+//         // over as buffers
+//         fname = filename;
 
-        code = code.toString();
+//         code = code.toString();
 
-        var arr = code.split('---');
+//         var arr = code.split('---');
 
-        // Last item in array is the code
-        // AKA anything after last "---"
-        return arr[arr.length - 1].trim();
+//         // Last item in array is the code
+//         // AKA anything after last "---"
+//         return arr[arr.length - 1].trim();
 
-    });
+//     });
 
-    return gulp.src('patterns/**/*.md')
-        .pipe(getMarkup)
-        .pipe(rename(function (path) {
-            path.extname = ".html";
-        }))
-        // .on('error', errorHandler)
-        .pipe(gulp.dest("tmp/patterns"));
+//     return gulp.src('patterns/**/*.md')
+//         .pipe(getMarkup)
+//         .pipe(rename(function (path) {
+//             path.extname = ".html";
+//         }))
+//         // .on('error', errorHandler)
+//         .pipe(gulp.dest("tmp/patterns"));
 
-});
+// });
 
 gulp.task('connect', function() {
     connect.server({
@@ -85,8 +85,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('default', function(callback) {
-    runSequence('clean',
-        ['stylus', 'patternz'],
+    runSequence('stylus',
         ['tree', 'connect', 'watch'],
         callback);
 });

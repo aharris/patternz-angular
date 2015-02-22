@@ -38,10 +38,10 @@ gulp.task('watch', function () {
     gulp.watch(['./patterns/**/*.html'], ['tree']);
 });
 
-// gulp.task('clean', function () {
-//     return gulp.src('tmp/patterns', {read: false})
-//         .pipe(clean());
-// });
+gulp.task('clean', function () {
+    return gulp.src('tmp/patterns', {read: false})
+        .pipe(clean());
+});
 
 gulp.task('tree', function () {
     gulp.src('patterns/**/*.html')

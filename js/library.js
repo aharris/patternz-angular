@@ -110,7 +110,7 @@
 
                 showAllOptions(idx, data);
 
-                lines = data.split("\n").join("\n\n");
+                lines = data.split("\n").join("\n");
                 $scope.htmlMarkup = lines;
                 // $scope.htmlMarkup[idx] = lines;
             });

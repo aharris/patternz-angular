@@ -129,20 +129,23 @@
                 optVal,
                 optComment;
 
-            if(!$scope.opts) {return false;}
+            if($scope.opts) {
 
-            for (var i = 0; i < $scope.opts.length; i++) {
-                optKey = Object.keys($scope.opts[i])[0];
-                optVal = $scope.opts[i][optKey].val;
-                optComment = $scope.opts[i][optKey].comment ? ' // ' + $scope.opts[i][optKey].comment : '';
+                for (var i = 0; i < $scope.opts.length; i++) {
+                    optKey = Object.keys($scope.opts[i])[0];
+                    optVal = $scope.opts[i][optKey].val;
+                    optComment = $scope.opts[i][optKey].comment ? ' // ' + $scope.opts[i][optKey].comment : '';
 
-                // optString += optKey + '="' + optVal + '" ' + optComment;
-                optString += optKey + '="' + optVal + '" ';
+                    // optString += optKey + '="' + optVal + '" ' + optComment;
+                    optString += optKey + '="' + optVal + '" ';
 
+                }
+
+                attr = $scope.opts ? optString : '';
+                ngTemplate = '<' + tag + ' ' + attr +'"></' + tag + '>';
+            } else {
+                ngTemplate = '<' + tag + '></' + tag + '>';
             }
-
-            attr = $scope.opts ? optString : '';
-            ngTemplate = '<' + tag + ' ' + attr +'"></' + tag + '>';
 
             $scope.ngMarkup = ngTemplate;
         }

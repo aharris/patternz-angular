@@ -119,7 +119,7 @@
 
         // Params:
         // opts - array of options passed in the partial html file
-        // shortPath - name of the custom tag
+        // tag - name of the custom tag from JSON
         // idx - the index of the current pattern being iterated
         function generateUsageMarkup(tag) {
             var attr,

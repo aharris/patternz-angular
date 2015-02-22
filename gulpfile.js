@@ -1,3 +1,5 @@
+"use strict";
+
 var gulp = require('gulp'),
     stylus = require('gulp-stylus'),
     nib = require('nib'),
@@ -19,9 +21,9 @@ gulp.task('stylus', function () {
         .pipe(gulp.dest('./css'))
         .pipe(connect.reload());
 
-    gulp.src(['./patternz/styl/*.styl', '!styl/**/_*'])
+    gulp.src(['./library/styl/*.styl', '!styl/**/_*'])
         .pipe(stylus({use: [nib()]}))
-        .pipe(gulp.dest('./patternz/css'))
+        .pipe(gulp.dest('./library/css'))
         .pipe(connect.reload());
 });
 
@@ -31,10 +33,9 @@ gulp.task('html', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['styl/**/*.styl', './patternz/styl/*.styl'], ['stylus']);
+    gulp.watch(['styl/**/*.styl', './library/styl/*.styl'], ['stylus']);
     gulp.watch(['./**/*.html'], ['html']);
     gulp.watch(['./patterns/**/*.html'], ['tree']);
-    // gulp.watch(['./patterns/**/*.html'], ['patternz']);
 });
 
 // gulp.task('clean', function () {
@@ -47,35 +48,8 @@ gulp.task('tree', function () {
       .pipe(directoryMap({
         filename: 'tree.json'
       }))
-      .pipe(gulp.dest('patternz/data'));
+      .pipe(gulp.dest('library/data'));
 });
-
-// gulp.task('patternz', function () {
-//     var fname;
-//     var getMarkup = map(function(code, filename) {
-//         // file contents are handed
-//         // over as buffers
-//         fname = filename;
-
-//         code = code.toString();
-
-//         var arr = code.split('---');
-
-//         // Last item in array is the code
-//         // AKA anything after last "---"
-//         return arr[arr.length - 1].trim();
-
-//     });
-
-//     return gulp.src('patterns/**/*.md')
-//         .pipe(getMarkup)
-//         .pipe(rename(function (path) {
-//             path.extname = ".html";
-//         }))
-//         // .on('error', errorHandler)
-//         .pipe(gulp.dest("tmp/patterns"));
-
-// });
 
 gulp.task('connect', function() {
     connect.server({

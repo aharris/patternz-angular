@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="pz">
+<html ng-app="app" ng-controller="AppCtrl as app">
 <head>
     <title>Patternz</title>
 </head>
@@ -14,7 +14,7 @@
 <!-- External CSS -->
 <link rel="stylesheet" type="text/css" href="css/patternz.css">
 <link rel="stylesheet" type="text/css" href="../css/main.css">
-<body ng-controller="PatternzCtrl as pz">
+<body ng-controller="LibCtrl as lib">
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -57,7 +57,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
     <script type="text/javascript" src="../bower_components/angular-highlightjs/angular-highlightjs.min.js" ></script>
     <script type="text/javascript" src="../js/main.js" ></script>
-    <script type="text/javascript" src="js/patternz.js" ></script>
+    <script type="text/javascript" src="../js/patterns.js" ></script>
+    <script type="text/javascript" src="../js/patterns/elements.js" ></script>
+    <script type="text/javascript" src="../js/library.js" ></script>
 </body>
 </html>
 

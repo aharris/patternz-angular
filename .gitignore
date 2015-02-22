@@ -1,4 +1,4 @@
 css/*
-node_modules/
+node_modules/*
 patternz/data/tree.json
 tmp/

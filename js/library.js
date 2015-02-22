@@ -1,22 +1,22 @@
 (function () {
     'use strict';
 
-    var pz = angular.module('pz', [
+    var lib = angular.module('library', [
         'ngRoute',
         'hljs'
     ]);
 
-    pz.config(function ($routeProvider, hljsServiceProvider) {
+    lib.config(function ($routeProvider, hljsServiceProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: 'overview.html',
-                controller: 'PatternzCtrl',
-                controllerAs: 'pz'
+                controller: 'LibCtrl',
+                controllerAs: 'lib'
             })
             .when('/:pattern', {
                 templateUrl: 'template.html',
-                controller: 'PatternzCtrl',
-                controllerAs: 'pz'
+                controller: 'LibCtrl',
+                controllerAs: 'lib'
             })
             .otherwise({redirectTo: '/'});
 
@@ -27,13 +27,13 @@
     });
 
     // Pattern Library
-    pz.controller('PatternzCtrl', ['$scope', '$http','$location', 'filterFilter', '$anchorScroll', function ($scope, $http, $location, filterFilter, $anchorScroll) {
+    lib.controller('LibCtrl', ['$scope', '$http','$location', 'filterFilter', '$anchorScroll', function ($scope, $http, $location, filterFilter, $anchorScroll) {
 
         $scope.tree = {};
 
         $scope.patternGroup = '_';
 
-        $http.get('data/tree.json').success(function (data) {
+        $http.get('../library/data/tree.json').success(function (data) {
             $scope.tree = data;
             $scope.getCurrentPattern();
         });
@@ -102,16 +102,17 @@
         // data - Partial html file
         // idx - the index of the current pattern being iterated
         function generateHtmlMarkup(shortPath, idx) {
+            // debugger;
             var lines,
-                markupPath = $scope.path[shortPath].replace(/.md/, ".html");
+                markupPath = $scope.path[shortPath];
 
             $http.get('../' + markupPath).success(function (data) {
 
                 showAllOptions(idx, data);
 
                 lines = data.split("\n").join("\n\n");
-                $scope.htmlMarkup = $scope.htmlMarkup || {};
-                $scope.htmlMarkup[idx] = lines;
+                $scope.htmlMarkup = lines;
+                // $scope.htmlMarkup[idx] = lines;
             });
 
         }
@@ -146,7 +147,6 @@
             ngTemplate = '<ng-include src="path.' + shortPath.toLowerCase() + ngRepeat +'"></ng-include>';
 
             $scope.ngMarkup = ngTemplate;
-            // $scope.ngMarkup[idx] = ngTemplate;
         }
 
         //Params:

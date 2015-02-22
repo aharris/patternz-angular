@@ -1,4 +1,4 @@
-<div ng-controller="PatternzCtrl as pz">
+<div ng-controller="LibCtrl as lib">
     <div class="page-header">
         <h1 class="pz-group-header">{{patternGroup}}</h1>
         <nav ng-if="currentPatterns.length > 1">
@@ -36,7 +36,7 @@
             <br/>
             <p>Markup:</p>
             <pre class="hljs">
-{{htmlMarkup[$index]}}
+{{htmlMarkup}}
             </pre>
         </div>
 

@@ -12,17 +12,8 @@
 
         <h1>{{data.title}}</h1>
 
-        <ng-include src="path.button" ng-repeat="opt in [{
-            anchor: true,
-            text: 'Primary Button',
-            style: 'primary'
-        }]"></ng-include>
-
-        <ng-include src="path.button" ng-repeat="opt in [{
-            input: true,
-            type: 'button',
-            text: 'Input'
-        }]"></ng-include>
+        <btn anchor="true" text="lala" style="primary"></btn>
+        <btn anchor="true" text="haha" style="info"></btn>
 
 
     </div>
@@ -30,7 +21,12 @@
     <script type="text/javascript" src="bower_components/underscore/underscore-min.js" ></script>
     <script type="text/javascript" src="bower_components/angular/angular.min.js" ></script>
     <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-highlightjs/angular-highlightjs.min.js" ></script>
     <script type="text/javascript" src="js/main.js" ></script>
+    <script type="text/javascript" src="js/patterns.js" ></script>
+    <script type="text/javascript" src="js/patterns/elements.js" ></script>
+    <script type="text/javascript" src="js/library.js" ></script>
 </body>
 </html>
 

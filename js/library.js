@@ -83,7 +83,7 @@
             $scope.examples = data.examples;
             $scope.hideMarkup = data.hideMarkup;
 
-            generateUsageMarkup(data.name);
+            generateUsageMarkup(data.tag);
         };
 
         $scope.gotoAnchor = function(x) {
@@ -119,10 +119,10 @@
 
         // Params:
         // opts - array of options passed in the partial html file
-        // shortPath - name of the html file to be included
+        // shortPath - name of the custom tag
         // idx - the index of the current pattern being iterated
-        function generateUsageMarkup(shortPath) {
-            var ngRepeat,
+        function generateUsageMarkup(tag) {
+            var attr,
                 ngTemplate,
                 optString = '',
                 optKey = '',
@@ -136,15 +136,13 @@
                 optVal = $scope.opts[i][optKey].val;
                 optComment = $scope.opts[i][optKey].comment ? ' // ' + $scope.opts[i][optKey].comment : '';
 
-                if (i === $scope.opts.length - 1 ) {
-                    optString += optKey + ':' + optVal + optComment;
-                } else {
-                    optString += optKey + ':' + optVal + ',' + optComment + '\n';
-                }
+                // optString += optKey + '="' + optVal + '" ' + optComment;
+                optString += optKey + '="' + optVal + '" ';
+
             }
 
-            ngRepeat = $scope.opts ? '" ng-repeat="opt in [{\n' + optString +'\n}]' : '';
-            ngTemplate = '<ng-include src="path.' + shortPath.toLowerCase() + ngRepeat +'"></ng-include>';
+            attr = $scope.opts ? optString : '';
+            ngTemplate = '<' + tag + ' ' + attr +'"></' + tag + '>';
 
             $scope.ngMarkup = ngTemplate;
         }

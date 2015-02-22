@@ -1,5 +1,6 @@
 {
     "name" : "Buttons",
+    "tag" : "btn",
     "Description" : "We are buttons.",
     "allOptions" : [
         {

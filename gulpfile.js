@@ -3,14 +3,8 @@
 var gulp = require('gulp'),
     stylus = require('gulp-stylus'),
     nib = require('nib'),
-    sourcemaps = require('gulp-sourcemaps'),
-    watch = require('gulp-watch'),
     connect = require('gulp-connect'),
     directoryMap = require("gulp-directory-map"),
-    data = require('gulp-data'),
-    gutil = require('gulp-util'),
-    map = require('vinyl-map'),
-    rename = require("gulp-rename"),
     runSequence = require('run-sequence'),
     clean = require('gulp-clean');
 

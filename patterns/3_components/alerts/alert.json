@@ -1,4 +1,26 @@
 {
-  "name": "Alert",
-  "tag": "alert"
+    "name": "Alert",
+    "tag": "alert",
+    "allOptions" : [
+        {
+            "success" : {
+                "val" : "boolean"
+            }
+        },
+        {
+            "info" : {
+                "val" : "boolean"
+            }
+        },
+        {
+            "warning" : {
+                "val" : "boolean"
+            }
+        },
+        {
+            "danger" : {
+                "val" : "boolean"
+            }
+        }
+    ]
 }

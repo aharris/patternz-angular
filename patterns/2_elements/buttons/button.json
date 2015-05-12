@@ -1,7 +1,7 @@
 {
     "name" : "Buttons",
     "tag" : "btn",
-    "Description" : "We are buttons.",
+    "description" : "We are buttons.",
     "allOptions" : [
         {
             "anchor" : {

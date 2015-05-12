@@ -13,6 +13,9 @@
         <div class="page-header" ng-if="currentPatterns.length > 1">
             <h2 id="{{shortPath[$index]}}" class="pz-pattern-header">{{patternTitle[$index]}}</h2>
         </div>
+        <div class="page-description" ng-if="description.length > 0">
+            <p>{{description}}</p>
+        </div>
 
         <div ng-if="conditionalOpts[$index].length > 0">
             <ng-include src=" '../patterns/' + pattern " ng-repeat="opt in conditionalOpts[$index] "></ng-include>

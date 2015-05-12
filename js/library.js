@@ -79,6 +79,7 @@
 
         $scope.parseJSONdata = function (data) {
             $scope.patternGroup = data.name;
+            $scope.description = data.description;
             $scope.opts = data.allOptions;
             $scope.examples = data.examples;
             $scope.hideMarkup = data.hideMarkup;

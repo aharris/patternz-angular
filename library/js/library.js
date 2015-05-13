@@ -16,7 +16,6 @@
         });
 
         $scope.navActive = false;
-        $scope.key = 'foo';
 
         $scope.getCurrentPattern = function () {
             var tree = $scope.tree,

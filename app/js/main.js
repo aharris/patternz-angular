@@ -40,7 +40,7 @@
     app.controller('AppCtrl', ['$scope', function ($scope) {
 
         $scope.data = {
-            title: 'Patternz'
+            title: 'This is your main application.'
         };
 
     }]);

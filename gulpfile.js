@@ -10,50 +10,73 @@ var gulp = require('gulp'),
 
 
 gulp.task('stylus', function () {
-    gulp.src(['./styl/*.styl', '!styl/**/_*'])
+    gulp.src(['./app/styl/*.styl', '!styl/**/_*'])
         .pipe(stylus({use: [nib()]}))
-        .pipe(gulp.dest('./css'))
+        .pipe(gulp.dest('./dist/css'))
         .pipe(connect.reload());
 
     gulp.src(['./library/styl/*.styl', '!styl/**/_*'])
         .pipe(stylus({use: [nib()]}))
-        .pipe(gulp.dest('./library/css'))
+        .pipe(gulp.dest('./dist/library/css'))
         .pipe(connect.reload());
 });
 
 gulp.task('html', function () {
-    gulp.src('**/*.html')
-      .pipe(connect.reload());
+    gulp.src('app/**/*.html')
+        .pipe(gulp.dest('dist'))
+        .pipe(connect.reload());
+
+    gulp.src('library/**/*.html')
+        .pipe(gulp.dest('dist/library'))
+        .pipe(connect.reload());
+
 });
 
 gulp.task('watch', function () {
     gulp.watch(['styl/**/*.styl', './library/styl/*.styl'], ['stylus']);
     gulp.watch(['./**/*.html'], ['html']);
-    gulp.watch(['./patterns/**/*.html'], ['tree']);
+    gulp.watch(['./app/patterns/**/*.html'], ['tree']);
+    gulp.watch(['./app/**/*.js', './patterns/**/*.js'], ['js']);
+    gulp.watch(['./app/patterns/**/*.json'], ['json']);
 });
 
 gulp.task('clean', function () {
-    return gulp.src('tmp/patterns', {read: false})
+    return gulp.src('dist', {read: false})
         .pipe(clean());
 });
 
 gulp.task('tree', function () {
-    gulp.src('patterns/**/*.html')
+    gulp.src('app/patterns/**/*.html')
       .pipe(directoryMap({
         filename: 'tree.json'
       }))
-      .pipe(gulp.dest('library/data'));
+      .pipe(gulp.dest('dist/library/data'));
 });
 
 gulp.task('connect', function() {
     connect.server({
-        root: [__dirname],
+        root: ['./dist', './bower_components'],
         livereload: true
     });
 });
 
+gulp.task('js', function () {
+    gulp.src(['app/**/*.js'])
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('json', function () {
+    gulp.src(['app/patterns/**/*.json'])
+    .pipe(gulp.dest('dist/patterns'));
+});
+
 gulp.task('default', function(callback) {
-    runSequence('stylus',
+    runSequence(
+        ['clean'],
+        'html',
+        'stylus',
+        'js',
+        'json',
         ['tree', 'connect', 'watch'],
         callback);
 });

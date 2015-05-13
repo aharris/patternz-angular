@@ -68,6 +68,8 @@
                 }
             }
 
+            if(!$scope.patternData) { return false }
+
             $http.get($scope.patternData).success(function (data) {
                 $scope.parseJSONdata(data);
             })

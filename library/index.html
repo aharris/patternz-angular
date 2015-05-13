@@ -32,12 +32,12 @@
 
         <nav class="pz-nav">
             <ul class="nav nav-pills nav-stacked">
-                <li><a href="#/library/" ng-click="navActive=!navActive">Overview</a></li>
+                <li><a ui-sref="library/overview" ng-click="navActive=!navActive">Overview</a></li>
                 <li ng-repeat="(key, data) in tree track by $index">
                     {{key}}
                     <ul class="nav nav-pills nav-stacked">
                         <li ng-repeat="(key, data) in tree[key] track by $index">
-                            <a ng-href="#/library/{{key}}" ng-click="$parent.$parent.navActive=!$parent.$parent.navActive">{{key}}</a>
+                            <a ui-sref="library/template({key: key })" ng-click="$parent.$parent.navActive=!$parent.$parent.navActive">{{key}}</a>
                         </li>
                     </ul>
                 </li>
@@ -47,7 +47,7 @@
 
             <!-- <h1>{{data.title}}</h1> -->
 
-            <div ng-view autoscroll=""></div>
+            <div ui-view autoscroll=""></div>
         </div>
     </div>
 

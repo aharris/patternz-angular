@@ -9,6 +9,7 @@
   "author": "@busyPixels",
   "license": "ISC",
   "devDependencies": {
+    "angular-ui-router": "^0.2.14",
     "browserify": "^10.1.3",
     "globby": "^2.0.0",
     "gulp": "^3.8.10",

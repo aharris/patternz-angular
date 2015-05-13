@@ -1,6 +1,6 @@
 {
   "name": "angular-highlightjs",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "AngularJS directive for syntax highlighting with highlight.js.",
   "main": "angular-highlightjs.js",
   "ignore": [
@@ -20,14 +20,13 @@
   },
   "devDependencies": {},
   "homepage": "https://github.com/pc035860/angular-highlightjs",
-  "_release": "0.3.2",
+  "_release": "0.3.3",
   "_resolution": {
     "type": "version",
-    "tag": "v0.3.2",
-    "commit": "f96828e24a374f22c7a7d1554eb435df95c02004"
+    "tag": "v0.3.3",
+    "commit": "8d34afc39841a5097a974ea370a447197fc5b6a5"
   },
   "_source": "git://github.com/pc035860/angular-highlightjs.git",
   "_target": "~0.3.2",
-  "_originalSource": "angular-highlightjs",
-  "_direct": true
+  "_originalSource": "angular-highlightjs"
 }

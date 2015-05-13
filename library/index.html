@@ -32,12 +32,12 @@
 
         <nav class="pz-nav">
             <ul class="nav nav-pills nav-stacked">
-                <li><a href="#/" ng-click="navActive=!navActive">Overview</a></li>
+                <li><a href="#/library/" ng-click="navActive=!navActive">Overview</a></li>
                 <li ng-repeat="(key, data) in tree track by $index">
                     {{key}}
                     <ul class="nav nav-pills nav-stacked">
                         <li ng-repeat="(key, data) in tree[key] track by $index">
-                            <a ng-href="#{{key}}" ng-click="$parent.$parent.navActive=!$parent.$parent.navActive">{{key}}</a>
+                            <a ng-href="#/library/{{key}}" ng-click="$parent.$parent.navActive=!$parent.$parent.navActive">{{key}}</a>
                         </li>
                     </ul>
                 </li>
@@ -52,15 +52,16 @@
     </div>
 
     <script type="text/javascript" src="../underscore/underscore-min.js" ></script>
-    <script type="text/javascript" src="../angular/angular.min.js" ></script>
-    <script type="text/javascript" src="../angular-route/angular-route.min.js" ></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
-    <script type="text/javascript" src="../angular-highlightjs/angular-highlightjs.min.js" ></script>
+<!--     // <script type="text/javascript" src="../angular/angular.min.js" ></script>
+    // <script type="text/javascript" src="../angular-route/angular-route.min.js" ></script> -->
+    <!-- // <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script> -->
     <script type="text/javascript" src="../js/main.js" ></script>
-    <script type="text/javascript" src="../js/patterns.js" ></script>
-    <script type="text/javascript" src="../js/patterns/elements.js" ></script>
-    <script type="text/javascript" src="../js/patterns/components.js" ></script>
-    <script type="text/javascript" src="../js/library.js" ></script>
+    <!-- // <script type="text/javascript" src="angular-highlightjs.min.js" ></script> -->
+
+<!--     // <script type="text/javascript" src="../js/patterns.js" ></script>
+    // <script type="text/javascript" src="../js/patterns/elements.js" ></script>
+    // <script type="text/javascript" src="../js/patterns/components.js" ></script> -->
+    <!-- // <script type="text/javascript" src="js/library.js" ></script> -->
 </body>
 </html>
 

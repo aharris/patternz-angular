@@ -1,30 +1,33 @@
 (function () {
     'use strict';
 
+    // var angular = require('angular');
+    var ngRoute = require('angular-route');
+
     var lib = angular.module('library', [
-        'ngRoute',
-        'hljs'
+        'ngRoute'
+        // 'hljs'
     ]);
 
-    lib.config(function ($routeProvider, hljsServiceProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl: 'overview.html',
-                controller: 'LibCtrl',
-                controllerAs: 'lib'
-            })
-            .when('/:pattern', {
-                templateUrl: 'template.html',
-                controller: 'LibCtrl',
-                controllerAs: 'lib'
-            })
-            .otherwise({redirectTo: '/'});
+    // lib.config(function ($routeProvider) {
+    //     $routeProvider
+    //         .when('/', {
+    //             templateUrl: 'overview.html',
+    //             controller: 'LibCtrl',
+    //             controllerAs: 'lib'
+    //         })
+    //         .when('/:pattern', {
+    //             templateUrl: 'template.html',
+    //             controller: 'LibCtrl',
+    //             controllerAs: 'lib'
+    //         })
+    //         .otherwise({redirectTo: '/'});
 
-        hljsServiceProvider.setOptions({
-            // replace tab with 4 spaces
-            tabReplace: '    '
-        });
-    });
+    //     // hljsServiceProvider.setOptions({
+    //     //     // replace tab with 4 spaces
+    //     //     tabReplace: '    '
+    //     // });
+    // });
 
     // Pattern Library
     lib.controller('LibCtrl', ['$scope', '$http','$location', 'filterFilter', '$anchorScroll', function ($scope, $http, $location, filterFilter, $anchorScroll) {

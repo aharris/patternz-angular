@@ -5,7 +5,7 @@
 
     var app = angular.module('app', [
         require('angular-ui-router'),
-        'library'
+        'library',
     ]);
 
     app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -34,24 +34,6 @@
                 }
             });
 
-            // .when('#library/', {
-            //     templateUrl: 'library/overview.html',
-            //     controller: 'LibCtrl',
-            //     controllerAs: 'lib'
-            // })
-
-            // .when('/library/:pattern', {
-            //     templateUrl: 'library/template.html',
-            //     controller: 'LibCtrl',
-            //     controllerAs: 'lib'
-            // })
-
-            // .otherwise({redirectTo: '/'});
-
-        // hljsServiceProvider.setOptions({
-        //     // replace tab with 4 spaces
-        //     tabReplace: '    '
-        // });
     }]);
 
     // Main App

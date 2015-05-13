@@ -9,6 +9,7 @@
   "author": "@busyPixels",
   "license": "ISC",
   "devDependencies": {
+    "angular-highlightjs": "^0.4.1",
     "angular-ui-router": "^0.2.14",
     "browserify": "^10.1.3",
     "globby": "^2.0.0",

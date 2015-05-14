@@ -1,7 +1,28 @@
 (function () {
     'use strict';
 
-    var lib = angular.module('library', []);
+    var angular = require('angular');
+
+    var lib = angular.module('lib', [
+        require('angular-ui-router'),
+    ]);
+
+    lib.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise("overview");
+
+        $stateProvider
+
+            .state('library/overview', {
+              url: "/overview",
+              templateUrl: "overview.html"
+            })
+
+            .state('library/template', {
+              url: "/{key}",
+              templateUrl: "template.html",
+            })
+
+    }]);
 
     // Pattern Library
     lib.controller('LibCtrl', ['$scope', '$http','$location', 'filterFilter', '$anchorScroll', function ($scope, $http, $location, filterFilter, $anchorScroll) {

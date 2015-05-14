@@ -1,9 +1,9 @@
 (function() {
     "use strict";
 
-    var app = angular.module('app');
+    var patterns = angular.module('patterns');
 
-    app.directive('alert', function(){
+    patterns.directive('alert', function(){
         return{
             restrict: 'E',
             scope: true,

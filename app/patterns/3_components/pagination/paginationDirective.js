@@ -1,9 +1,9 @@
 (function() {
     "use strict";
 
-    var app = angular.module('app');
+    var patterns = angular.module('patterns');
 
-    app.directive('pagination', function(){
+    patterns.directive('pagination', function(){
         return{
             restrict: 'E',
             scope: true,

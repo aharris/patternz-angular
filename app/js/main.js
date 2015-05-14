@@ -5,34 +5,23 @@
 
     var app = angular.module('app', [
         require('angular-ui-router'),
-        'library',
+        'patterns'
     ]);
 
     app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise("overview");
+        // $urlRouterProvider.otherwise("overview");
 
-        $stateProvider
+        // $stateProvider
 
-            .state('library/overview', {
-              url: "/overview",
-              templateUrl: "overview.html"
-            })
+        //     .state('library/overview', {
+        //       url: "/overview",
+        //       templateUrl: "overview.html"
+        //     })
 
-            .state('library/template', {
-              url: "/{key}",
-              templateUrl: "template.html",
-            })
-
-            .state('partyDetail', {
-                url: '/party/:partyID/:partyLocation',
-                controller: function($scope, $stateParams) {
-                    // get the id
-                    $scope.id = $stateParams.partyID;
-
-                    // get the location
-                    $scope.location = $stateParams.partyLocation;
-                }
-            });
+        //     .state('library/template', {
+        //       url: "/{key}",
+        //       templateUrl: "template.html",
+        //     })
 
     }]);
 

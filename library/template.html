@@ -1,0 +1,55 @@
+<div ng-controller="LibCtrl as lib">
+    <div class="page-header">
+        <h1 class="pz-group-header">{{patternGroup}}</h1>
+        <nav ng-if="currentPatterns.length > 1">
+            <ul class="nav nav-pills">
+                <li ng-repeat="pattern in currentPatterns">
+                    <a href="#{{shortPath[$index]}}" class="pz-pattern-header" ng-click="gotoAnchor(shortPath[$index]); $event.preventDefault()">{{patternTitle[$index]}}</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div ng-repeat="pattern in currentPatterns">
+        <div class="page-header" ng-if="currentPatterns.length > 1">
+            <h2 id="{{shortPath[$index]}}" class="pz-pattern-header">{{patternTitle[$index]}}</h2>
+        </div>
+        <div class="page-description" ng-if="description.length > 0">
+            <p>{{description}}</p>
+        </div>
+
+        <div ng-if="conditionalOpts[$index].length > 0">
+            <ng-include src=" '../patterns/' + pattern " ng-repeat="opt in conditionalOpts[$index] "></ng-include>
+        </div>
+        <div ng-if="!conditionalOpts[$index]">
+            <ng-include src=" '../patterns/' + pattern "></ng-include>
+        </div>
+
+        <div class="clearfix"></div>
+        <br/>
+        <br/>
+
+        <div ng-hide="hideMarkup">
+
+            <p>Usage:</p>
+            <pre class="hljs">
+{{ngMarkup}}
+            </pre>
+            <br/>
+            <br/>
+            <br/>
+            <p>Markup:</p>
+            <pre class="hljs">
+{{htmlMarkup}}
+            </pre>
+        </div>
+
+        <div ng-repeat="example in examples">
+            <h2>{{example.name}}</h2>
+            <span ng-repeat="option in example.options">
+                <!-- {{pattern}} -->
+                <ng-include src=" '../patterns/' + pattern " ng-repeat="opt in option"></ng-include>
+            </span>
+        </div>
+
+    </div>
+</div>

@@ -89,9 +89,7 @@ gulp.task('js', function () {
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
       // Add gulp plugins to the pipeline here.
-
-      // Minify Output
-      // .pipe(uglify())
+      .pipe(uglify())
       .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist/js/'))
@@ -144,10 +142,8 @@ gulp.task('library-js', function () {
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
       // Add gulp plugins to the pipeline here.
-
-    // Minify Output
-    // .pipe(uglify())
-    .on('error', gutil.log)
+      .pipe(uglify())
+      .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist/library/js/'))
     .pipe(connect.reload());
